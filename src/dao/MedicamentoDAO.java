@@ -81,4 +81,40 @@ public class MedicamentoDAO {
     }
     
     
+     public static ObjMedicamento getCidadeByCodigo(int codigo){
+        ObjMedicamento  med = new ObjMedicamento();
+        
+        String sql = " SELECT m.codigo, c.codigo, m.nome, c.nome,        "  
+                + " m.quantidade, m.data_de_cadastro, m.data_de_vencimento "
+                + " FROM medicamento m                                      "
+                + " INNER JOIN categorias c ON p.codCategoria=c.codigo        "
+                + " WHERE codigo = " + codigo
+                + " ORDER BY m.nome " ;
+        ResultSet rs = Conexao.consultar(sql);
+        try{
+            rs.first();
+            
+            med.setCodigo(rs.getInt(1));
+            med.setNome(rs.getString(3));
+            med.setQuantidade(rs.getDouble(5));
+            med.setData_de_cadastro(rs.getDate(6));
+            med.setData_de_vencimento(rs.getDate(7));
+
+
+
+            ObjCategoria cat = new ObjCategoria();
+            cat.setCodigo(rs.getInt(2));
+            cat.setNome(rs.getString(4));
+
+            med.setCategoria(cat);
+            
+        }catch (Exception e){
+            
+            JOptionPane.showMessageDialog(null, e.toString());
+            
+        }
+        return med;
+        
+     }
+    
 }
