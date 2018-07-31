@@ -46,9 +46,15 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
     }
     
     private void carregarFormulario(){
-        ObjMedicamento med = (ObjMedicamento) med;
-      txtNome.setText(cli.getNome());
-      txtTelefone.setText(cli.getTelefone());
+        ObjMedicamento med = (ObjMedicamento) medicamento;
+        String qtd = ""+med.getQuantidade();
+        qtd = qtd.replace(".", ",");
+        txtQuantidade.setText(qtd);
+        
+        txtNome.setText(med.getNome());
+        
+        
+    
       txtEndereço.setText(cli.getEndereco());
       lblCodigo.setText(String.valueOf(cli.getCodigo()));
       int contCidades = cmbCidade.getModel().getSize();
