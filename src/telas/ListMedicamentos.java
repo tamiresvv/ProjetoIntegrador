@@ -35,15 +35,18 @@ public class ListMedicamentos extends javax.swing.JInternalFrame {
         List<ObjMedicamento> lista = MedicamentoDAO.getMedicamentos();
         
         for(ObjMedicamento pro : lista ){
+            String vencimento = ""+pro.getData_de_vencimento().getDate()+"/"+(pro.getData_de_vencimento().getMonth()+1)+"/"+pro.getData_de_vencimento().getYear();
+            String cadastro = ""+pro.getData_de_cadastro().getDate()+"/"+(pro.getData_de_cadastro().getMonth()+1)+"/"+pro.getData_de_cadastro().getYear();
+            
             Object[] obj = { 
                 pro.getCodigo(), 
                 pro.getNome(),
-                pro.getData_de_cadastro(),
-                pro.getData_de_vencimento(),
-                pro.getCategoria(),
-                
-                    
+                pro.getQuantidade(),
+                cadastro,
+                vencimento,
+                pro.getCategoria().getNome()  
             };
+            
             modelo.addRow(obj);
         }
         tableMedicamentos.setModel(modelo);
