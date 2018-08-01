@@ -141,7 +141,7 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Cadastro de Medicamentos");
 
-        jPanel1.setBackground(new java.awt.Color(227, 225, 225));
+        jPanel1.setBackground(new java.awt.Color(192, 209, 228));
         jPanel1.setForeground(new java.awt.Color(162, 197, 197));
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N

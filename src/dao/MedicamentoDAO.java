@@ -85,8 +85,7 @@ public class MedicamentoDAO {
                     med.setData_de_cadastro(rs.getDate(6));
                     med.setData_de_vencimento(rs.getDate(7));
                     
-                    
-                    
+                  
                     ObjCategoria cat = new ObjCategoria();
                     cat.setCodigo(rs.getInt(2));
                     cat.setNome(rs.getString(4));
