@@ -19,53 +19,96 @@ import model.ObjMedicamento;
  * @author 181710089
  */
 public class FrmMedicamento extends javax.swing.JInternalFrame {
- private Object medicamento;
+
+    private ObjMedicamento medicamento;
+    private List<ObjCategoria> listaDeCategorias;
+    private boolean novo;
+    
+
     /**
      * Creates new form FrmMedicamento
-     */     
-    
+     */
+
     public FrmMedicamento() {
         initComponents();
         carregarCategorias();
         lblCodigo.setText("");
-        
+        novo = true;
+
     }
-    
-       
-    
-    private void carregarCategorias(){
+
+    public FrmMedicamento(int codigo) {
+        initComponents();
+        carregarCategorias();
+        medicamento = MedicamentoDAO.getMedicamentoByCodigo(codigo);
+        carregarFormulario();
+        novo = false;
+    }
+
+    private void carregarCategorias() {
         List<ObjCategoria> listaDeCategorias = CategoriaDAO.getCategorias();
         ObjCategoria fake = new ObjCategoria(0, "Selecione...");
         listaDeCategorias.add(0, fake);
-        
+
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        for( ObjCategoria cid : listaDeCategorias ){
+        for (ObjCategoria cid : listaDeCategorias) {
             modelo.addElement(cid);
         }
         cmbCategoria.setModel(modelo);
     }
-    
-    private void carregarFormulario(){
-        ObjMedicamento med = (ObjMedicamento) medicamento;
-        String qtd = ""+med.getQuantidade();
+
+    private void carregarFormulario() {
+        String qtd = "" + medicamento.getQuantidade();
         qtd = qtd.replace(".", ",");
         txtQuantidade.setText(qtd);
+
+        txtNome.setText(medicamento.getNome());
+
+        lblCodigo.setText(String.valueOf(medicamento.getCodigo()));
         
-        txtNome.setText(med.getNome());
-        
-        
-    
-      txtEndereço.setText(cli.getEndereco());
-      lblCodigo.setText(String.valueOf(cli.getCodigo()));
-      int contCidades = cmbCidade.getModel().getSize();
-        for (int i = 1; i < contCidades; i++) {
-            ObjCidade cid = listaDeCidades.get(i);
-            if(cid.getCodigo()== cli.getCidade().getCodigo()){
-                cmbCidade.setSelectedIndex(i);
+        int contCategorias = cmbCategoria.getModel().getSize();
+        for (int i = 1; i < contCategorias; i++) {
+            ObjCategoria cat = listaDeCategorias.get(i);
+            if (cat.getCodigo() == medicamento.getCategoria().getCodigo()) {
+                cmbCategoria.setSelectedIndex(i);
                 break;
             }
-            ggg
         }
+
+        int dia = medicamento.getData_de_vencimento().getDate();
+        int mes = medicamento.getData_de_vencimento().getMonth() + 1;
+        int ano = medicamento.getData_de_vencimento().getYear();
+
+        String sdia = "" + dia;
+        if (dia < 10) {
+            sdia = "0" + dia;
+        }
+
+        String smes = "" + mes;
+        if (mes < 10) {
+            sdia = "0" + mes;
+        }
+
+        txtDataVencimento.setText(sdia + "/" + smes + "/" + ano);
+        
+        
+        
+        dia = medicamento.getData_de_cadastro().getDate();
+        mes = medicamento.getData_de_cadastro().getMonth() + 1;
+        ano = medicamento.getData_de_cadastro().getYear();
+
+        sdia = "" + dia;
+        if (dia < 10) {
+            sdia = "0" + dia;
+        }
+
+        smes = "" + mes;
+        if (mes < 10) {
+            sdia = "0" + mes;
+        }
+
+        txtDataCadastro.setText(sdia + "/" + smes + "/" + ano);
+
     }
 
     /**
@@ -272,81 +315,63 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDataVencimentoActionPerformed
 
     private void cmbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCategoriaItemStateChanged
-       
-        
-        
+
+
     }//GEN-LAST:event_cmbCategoriaItemStateChanged
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
+
         String nome = txtNome.getText();
         String quantidade = txtQuantidade.getText();
         String data_cadastro = txtDataCadastro.getText();
         String data_vencimento = txtDataVencimento.getText();
-        ObjCategoria categoria = (ObjCategoria) cmbCategoria.getSelectedItem(); 
-if( nome.isEmpty() || categoria.getCodigo() == 0 ) { 
-    JOptionPane.showMessageDialog(this,"Preencha todos os campos obrigatórios ! (Nome e Categoria)" ); 
-}else{ 
-    ObjMedicamento med = new ObjMedicamento();
-    med.setNome(nome);
-    if(!quantidade.isEmpty()){
-        quantidade = quantidade.replace(",", ".");
-        double q = Double.valueOf(quantidade);
-        med.setQuantidade(q);
+        ObjCategoria categoria = (ObjCategoria) cmbCategoria.getSelectedItem();
+        if (nome.isEmpty() || categoria.getCodigo() == 0) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos obrigatórios ! (Nome e Categoria)");
+        } else {
+            ObjMedicamento med = new ObjMedicamento();
+            med.setNome(nome);
+            if (!quantidade.isEmpty()) {
+                quantidade = quantidade.replace(",", ".");
+                double q = Double.valueOf(quantidade);
+                med.setQuantidade(q);
+            }
+            int dia = Integer.valueOf(data_cadastro.substring(0, 2));
+            int mes = Integer.valueOf(data_cadastro.substring(3, 5));
+            int ano = Integer.valueOf(data_cadastro.substring(6, 10));
+
+            Date cadastro = new Date(ano, (mes - 1), dia);
+
+            dia = Integer.valueOf(data_vencimento.substring(0, 2));
+            mes = Integer.valueOf(data_vencimento.substring(3, 5));
+            ano = Integer.valueOf(data_vencimento.substring(6, 10));
+
+            Date vencimento = new Date(ano, (mes - 1), dia);
+
+            med.setData_de_cadastro(cadastro);
+            med.setData_de_vencimento(vencimento);
+
+            med.setCategoria(categoria);
+            MedicamentoDAO.inserir(med);
+
+            limparFormulario();
+            if(!novo){
+        this.dispose();
     }
-    int dia = Integer.valueOf(data_cadastro.substring(0,2));
-    int mes = Integer.valueOf(data_cadastro.substring(3,5));
-    int ano = Integer.valueOf(data_cadastro.substring(6,10));
-    
-    Date cadastro = new Date(ano, (mes - 1), dia);
-    
-    
-    
-    dia = Integer.valueOf(data_vencimento.substring(0,2));
-    mes = Integer.valueOf(data_vencimento.substring(3,5));
-    ano = Integer.valueOf(data_vencimento.substring(6,10));
-    
-    Date vencimento = new Date(ano, (mes - 1), dia);
-    
-    
-    
-    
-    
-    
-    
-    dia =  vencimento.getDate();
-    String sdia = ""+dia;
-    if(dia < 10)
-        sdia = "0"+dia;
-    
-    String sano = ""+vencimento.getYear();
-    
-    
-    txtDataVencimento.setText(sdia+"/"+smes+"/"+sano);
-    
-    
-    
-    
-    
-    med.setCategoria(categoria);
-    MedicamentoDAO.inserir(med);
-    
-             
-    limparFormulario();
-}
-        
+        }
+
     }//GEN-LAST:event_btnSalvarActionPerformed
-private void limparFormulario(){
-    txtNome.setText("");  
-        txtQuantidade.setText("");  
+    private void limparFormulario() {
+        txtNome.setText("");
+        txtQuantidade.setText("");
         txtDataCadastro.setText("");
-        txtDataVencimento.setText(""); 
+        txtDataVencimento.setText("");
         cmbCategoria.setSelectedIndex(0);
-}
+    }
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        
+
         limparFormulario();
-        
+
     }//GEN-LAST:event_btnLimparActionPerformed
 
 

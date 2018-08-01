@@ -81,7 +81,7 @@ public class MedicamentoDAO {
     }
     
     
-     public static ObjMedicamento getCidadeByCodigo(int codigo){
+     public static ObjMedicamento getMedicamentoByCodigo(int codigo){
         ObjMedicamento  med = new ObjMedicamento();
         
         String sql = " SELECT m.codigo, c.codigo, m.nome, c.nome,        "  

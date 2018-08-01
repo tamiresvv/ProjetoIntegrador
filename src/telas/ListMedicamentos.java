@@ -178,6 +178,17 @@ public class ListMedicamentos extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
+        int linha = tableMedicamentos.getSelectedRow();
+        if( linha == -1 ){
+            JOptionPane.showMessageDialog(this, "Você deve selecionar um medicamento!");
+        }else{
+            int codigo = (int) tableMedicamentos.getValueAt(linha, 0);
+            FrmMedicamento tela = new FrmMedicamento(codigo);
+            this.painelTelaInicial.add(tela);
+            tela.setVisible(true);
+            
+        }
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
 
