@@ -64,7 +64,7 @@ public class FrmCategoria extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setTitle("Cadastro de Categorias");
 
-        jPanel1.setBackground(new java.awt.Color(235, 234, 234));
+        jPanel1.setBackground(new java.awt.Color(192, 209, 228));
 
         jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabel1.setText("Código:");

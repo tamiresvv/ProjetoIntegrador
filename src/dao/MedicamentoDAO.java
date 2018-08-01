@@ -12,12 +12,23 @@ import model.ObjMedicamento;
 
 public class MedicamentoDAO {
     public static void inserir(ObjMedicamento med){
+        int dia = med.getData_de_cadastro().getDate();
+        int mes = med.getData_de_cadastro().getMonth();
+        int ano = med.getData_de_cadastro().getYear();
+        String cadastro = ""+ano+"-"+(mes+1)+"-"+dia;
+        
+        dia = med.getData_de_vencimento().getDate();
+        mes = med.getData_de_vencimento().getMonth();
+        ano = med.getData_de_vencimento().getYear();
+        String vencimento = ""+ano+"-"+(mes+1)+"-"+dia;
+        
+        
         String sql = "INSERT INTO medicamentos "
                 + " ( nome, quantidade, data_de_cadastro, data_de_vencimento, codCategoria ) VALUES ("
                 + " '" + med.getNome()                  + "' ,"
-                + " '" + med.getQuantidade()            + "' ,"
-                + " '" + med.getData_de_cadastro()      + "' ,"
-                + " '" + med.getData_de_vencimento()    + "' ,"
+                + "  " + med.getQuantidade()            + "  ,"
+                + " '" + cadastro                       + "' ,"
+                + " '" + vencimento                     + "' ,"
                 + "  " + med.getCategoria().getCodigo() + "   "
                 + " );";
         Conexao.executar(sql);
@@ -25,11 +36,22 @@ public class MedicamentoDAO {
     }
     
     public static void editar(ObjMedicamento med){
+        
+        int dia = med.getData_de_cadastro().getDate();
+        int mes = med.getData_de_cadastro().getMonth();
+        int ano = med.getData_de_cadastro().getYear();
+        String cadastro = ""+ano+"-"+(mes+1)+"-"+dia;
+        
+        dia = med.getData_de_vencimento().getDate();
+        mes = med.getData_de_vencimento().getMonth();
+        ano = med.getData_de_vencimento().getYear();
+        String vencimento = ""+ano+"-"+(mes+1)+"-"+dia;
+        
         String sql = "UPDATE medicamentos SET "              
                 + " nome =               '"  + med.getNome()                  + "' ,"
-                + " quantidade =         '"  + med.getQuantidade()            + "' ,"
-                + " data_de_cadastro =   '"  + med.getData_de_cadastro()      + "' ,"
-                + " data_de_vencimento = '"  + med.getData_de_vencimento()    + "' ,"
+                + " quantidade =          "  + med.getQuantidade()            + "  ,"
+                + " data_de_cadastro =   '"  + cadastro                       + "' ,"
+                + " data_de_vencimento = '"  + vencimento                     + "' ,"
                 + " codCategoria =        "  + med.getCategoria().getCodigo() + "   "
                 + " WHERE codigo =        "  + med.getCodigo();
         Conexao.executar(sql);
@@ -47,8 +69,8 @@ public class MedicamentoDAO {
         List<ObjMedicamento> lista = new ArrayList<ObjMedicamento>();
         String sql = " SELECT m.codigo, c.codigo, m.nome, c.nome,        "  
                 + " m.quantidade, m.data_de_cadastro, m.data_de_vencimento "
-                + " FROM medicamento m                                      "
-                + " INNER JOIN categorias c ON p.codCategoria=c.codigo        "
+                + " FROM medicamentos m                                      "
+                + " INNER JOIN categorias c ON m.codCategoria=c.codigo        "
                 + " ORDER BY m.nome ";
         ResultSet rs = Conexao.consultar(sql);
         
@@ -63,8 +85,7 @@ public class MedicamentoDAO {
                     med.setData_de_cadastro(rs.getDate(6));
                     med.setData_de_vencimento(rs.getDate(7));
                     
-                    
-                    
+                  
                     ObjCategoria cat = new ObjCategoria();
                     cat.setCodigo(rs.getInt(2));
                     cat.setNome(rs.getString(4));
@@ -86,9 +107,9 @@ public class MedicamentoDAO {
         
         String sql = " SELECT m.codigo, c.codigo, m.nome, c.nome,        "  
                 + " m.quantidade, m.data_de_cadastro, m.data_de_vencimento "
-                + " FROM medicamento m                                      "
-                + " INNER JOIN categorias c ON p.codCategoria=c.codigo        "
-                + " WHERE codigo = " + codigo
+                + " FROM medicamentos m                                      "
+                + " INNER JOIN categorias c ON m.codCategoria=c.codigo        "
+                + " WHERE m.codigo = " + codigo
                 + " ORDER BY m.nome " ;
         ResultSet rs = Conexao.consultar(sql);
         try{
