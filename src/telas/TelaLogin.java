@@ -29,37 +29,31 @@ public class TelaLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblUsuario = new javax.swing.JLabel();
-        lblSenha = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
         btnAcessar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 500));
+        setTitle("Tela de Login");
+        setMaximumSize(new java.awt.Dimension(500, 500));
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(null);
+        setSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(null);
 
-        lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        lblUsuario.setText("USUÁRIO");
-        getContentPane().add(lblUsuario);
-        lblUsuario.setBounds(50, 70, 76, 22);
-
-        lblSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblSenha.setForeground(new java.awt.Color(255, 255, 255));
-        lblSenha.setText("SENHA");
-        getContentPane().add(lblSenha);
-        lblSenha.setBounds(60, 120, 55, 22);
+        txtUsuario.setBackground(new java.awt.Color(216, 216, 216));
         getContentPane().add(txtUsuario);
-        txtUsuario.setBounds(160, 70, 180, 33);
-        getContentPane().add(txtSenha);
-        txtSenha.setBounds(160, 110, 180, 37);
+        txtUsuario.setBounds(130, 190, 270, 30);
 
-        btnAcessar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSenha.setBackground(new java.awt.Color(216, 216, 216));
+        getContentPane().add(txtSenha);
+        txtSenha.setBounds(130, 250, 270, 30);
+
+        btnAcessar.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        btnAcessar.setForeground(new java.awt.Color(0, 51, 51));
+        btnAcessar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/login.png"))); // NOI18N
         btnAcessar.setText("ACESSAR");
         btnAcessar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,9 +61,11 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAcessar);
-        btnAcessar.setBounds(50, 160, 107, 31);
+        btnAcessar.setBounds(87, 320, 140, 30);
 
-        btnSair.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSair.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(0, 51, 51));
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/SAIR.png"))); // NOI18N
         btnSair.setText("SAIR");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,47 +73,36 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSair);
-        btnSair.setBounds(220, 160, 71, 31);
+        btnSair.setBounds(250, 320, 130, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/saiba-tudo-sobre-os-exames-oftalmologicos-1024x683-1024x585.jpg"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(490, 490));
-        jLabel1.setMinimumSize(new java.awt.Dimension(490, 490));
-        jLabel1.setPreferredSize(new java.awt.Dimension(490, 490));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/design-de-interface-de-usuario-de-login-membro-do-estilo-etiqueta-plana_1017-6732.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 940, 430);
-
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(100, 10, 290, 50);
-
-        jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(100, 30, 290, 30);
+        jLabel1.setBounds(-70, 0, 550, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-        /*  if(  txtUsuario.getText().equals("admin") && txtSenha.getText().equals("123456")){
-         */
-
-        TelaInicial tela = new TelaInicial();
-
-        tela.setVisible(true);
-        dispose();
-
-        /*
-      }else{
-             JOptionPane.showMessageDialog(rootPane, "Senha ou usuário inválidos");
-      }
-        
-         */
-
-    }//GEN-LAST:event_btnAcessarActionPerformed
-
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
          System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
+        /*  if(  txtUsuario.getText().equals("admin") && txtSenha.getText().equals("123456")){
+            */
+
+            TelaInicial tela = new TelaInicial();
+
+            tela.setVisible(true);
+            dispose();
+
+            /*
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Senha ou usuário inválidos");
+        }
+
+        */
+    }//GEN-LAST:event_btnAcessarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,10 +143,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnAcessar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblSenha;
-    private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
