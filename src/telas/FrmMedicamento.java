@@ -86,7 +86,7 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
 
         String smes = "" + mes;
         if (mes < 10) {
-            sdia = "0" + mes;
+            smes = "0" + mes;
         }
 
         txtDataVencimento.setText(sdia + "/" + smes + "/" + ano);
