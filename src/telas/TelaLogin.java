@@ -88,20 +88,20 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-        /*  if(  txtUsuario.getText().equals("admin") && txtSenha.getText().equals("123456")){
-            */
+          if(  txtUsuario.getText().equals("admin") && txtSenha.getText().equals("123456")){
+            
 
             TelaInicial tela = new TelaInicial();
 
             tela.setVisible(true);
             dispose();
 
-            /*
+            
         }else{
             JOptionPane.showMessageDialog(rootPane, "Senha ou usuário inválidos");
         }
 
-        */
+        
     }//GEN-LAST:event_btnAcessarActionPerformed
 
     /**
