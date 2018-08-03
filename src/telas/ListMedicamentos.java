@@ -6,6 +6,8 @@
 package telas;
 
 import dao.MedicamentoDAO;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -30,13 +32,30 @@ public class ListMedicamentos extends javax.swing.JInternalFrame {
     
     private void carregarTabela(){
         DefaultTableModel modelo = new DefaultTableModel();
-        String[] colunas = { "Código" , "Nome", "Quantidade", "Cadastro", "Vencimento", "Categoria"};
+        String[] colunas = { "Código" , "Nome", "Quantidade", "Cadastro", "Vencimento", "Categoria","Situação"};
         modelo.setColumnIdentifiers(colunas);
         List<ObjMedicamento> lista = MedicamentoDAO.getMedicamentos();
         
+       
+        
+        
         for(ObjMedicamento pro : lista ){
-            int dia = pro.getData_de_vencimento().getDate();
-            int mes = pro.getData_de_vencimento().getMonth() + 1;
+            
+            Calendar h = Calendar.getInstance(); 
+            Date hoje = new Date(h.get(Calendar.YEAR),h.get(Calendar.MONTH),h.get(Calendar.DAY_OF_MONTH));
+            
+            int dias = pro.getData_de_vencimento().compareTo(hoje); 
+            String situacao = "";
+            if(dias < 0) { 
+                situacao = "VENCIDO"; 
+            }
+            if(dias ==0) {
+                situacao = "VENCE HOJE";  
+            }
+            
+    
+            int dia = pro.getData_de_vencimento().getDate(); 
+            int mes = pro.getData_de_vencimento().getMonth() + 1; 
 
             String sdia = "" + dia;
             if (dia < 10) {
@@ -48,7 +67,7 @@ public class ListMedicamentos extends javax.swing.JInternalFrame {
                 smes = "0" + mes;
             }
             
-            String vencimento = sdia+"/"+smes+"/"+pro.getData_de_vencimento().getYear();
+                String vencimento = sdia+"/"+smes+"/"+pro.getData_de_vencimento().getYear();
             
             
             dia = pro.getData_de_cadastro().getDate();
@@ -69,7 +88,8 @@ public class ListMedicamentos extends javax.swing.JInternalFrame {
                 pro.getQuantidade(),
                 cadastro,
                 vencimento,
-                pro.getCategoria().getNome()  
+                pro.getCategoria().getNome() ,
+                situacao
             };
             
             modelo.addRow(obj);

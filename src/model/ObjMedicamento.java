@@ -23,7 +23,7 @@ public class ObjMedicamento {
         this.codigo = codigo;
         this.quantidade = quantidade;
         this.nome = nome;
-        this.categoria = categoria; 
+        this.categoria = categoria;  
         this.data_de_cadastro =  data_de_cadastro; 
         this.data_de_vencimento= data_de_vencimento; 
     }
