@@ -54,6 +54,7 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1024, 768));
 
+        jdpTelaInicial.setBackground(new java.awt.Color(255, 255, 255));
         jdpTelaInicial.setPreferredSize(new java.awt.Dimension(1024, 1000));
 
         javax.swing.GroupLayout jdpTelaInicialLayout = new javax.swing.GroupLayout(jdpTelaInicial);
@@ -81,6 +82,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem2.setText("Sair");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem2);
 
         jMenuBar1.add(jMenu4);
@@ -182,6 +188,12 @@ public class TelaInicial extends javax.swing.JFrame {
         tela.setVisible(true);
         
     }//GEN-LAST:event_menuListarCategoriasActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
+        System.exit(0);
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
    
 

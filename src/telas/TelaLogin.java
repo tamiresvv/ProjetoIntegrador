@@ -5,6 +5,14 @@
  */
 package telas;
 
+import dao.Conexao;
+import dao.LoginDAO;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author 181700008
  */
 public class TelaLogin extends javax.swing.JFrame {
+
+    public String Acesso;
 
     /**
      * Creates new form TelaLogin
@@ -84,24 +94,30 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-         System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-          if(  txtUsuario.getText().equals("admin") && txtSenha.getText().equals("123456")){
-            
+        if (txtUsuario.getText().equals("") || txtSenha.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Login ou Senha inválido.");
+        } else {
+            if (txtUsuario.getText().equals("tfernandes") && txtSenha.getText().equals("12345")
+                    || txtUsuario.getText().equals("crenato") && txtSenha.getText().equals("12345")
+                    || txtUsuario.getText().equals("mferreira") && txtSenha.getText().equals("12345")
+                    || txtUsuario.getText().equals("admin") && txtSenha.getText().equals("abacate")) {
+                TelaInicial tela = new TelaInicial();
 
-            TelaInicial tela = new TelaInicial();
+                tela.setVisible(true);
+                dispose();                        //administrador ou usuário
+            } else {
+                JOptionPane.showMessageDialog(null, "Login ou Senha inválidos.");
+                txtSenha.setText("");
+                txtUsuario.setText("");
+            }
 
-            tela.setVisible(true);
-            dispose();
+        }//else do login e senha vazios
 
-            
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Senha ou usuário inválidos");
-        }
 
-        
     }//GEN-LAST:event_btnAcessarActionPerformed
 
     /**
