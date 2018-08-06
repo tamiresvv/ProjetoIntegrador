@@ -14,19 +14,19 @@ public class MedicamentoDAO {
         int dia = med.getData_de_cadastro().getDate();
         int mes = med.getData_de_cadastro().getMonth();
         int ano = med.getData_de_cadastro().getYear();
-        String cadastro = "" + ano + "-" + (mes + 1) + "-" + dia;
+        String cadastro = "" + ano + "/" + (mes + 1) + "/" + dia;
 
         dia = med.getData_de_vencimento().getDate();
         mes = med.getData_de_vencimento().getMonth();
         ano = med.getData_de_vencimento().getYear();
-        String vencimento = "" + ano + "-" + (mes + 1) + "-" + dia;
+        String vencimento = "" + ano + "/" + (mes + 1) + "/" + dia;
 
         String sql = "INSERT INTO medicamentos "
                 + " ( nome, quantidade, data_de_cadastro, data_de_vencimento, codCategoria ) VALUES ("
-                + " '" + med.getNome() + "' ,"
-                + "  " + med.getQuantidade() + "  ,"
-                + " '" + cadastro + "' ,"
-                + " '" + vencimento + "' ,"
+                + " '" + med.getNome() +                  "' ,"
+                + "  " + med.getQuantidade() +            "  ,"
+                + " '" + cadastro +                       "' ,"
+                + " '" + vencimento +                     "' ,"
                 + "  " + med.getCategoria().getCodigo() + "   "
                 + " );";
         Conexao.executar(sql);
@@ -38,18 +38,18 @@ public class MedicamentoDAO {
         int dia = med.getData_de_cadastro().getDate();
         int mes = med.getData_de_cadastro().getMonth();
         int ano = med.getData_de_cadastro().getYear();
-        String cadastro = "" + ano + "-" + (mes + 1) + "-" + dia;
+        String cadastro = "" + ano + "/" + (mes + 1) + "/" + dia;
 
         dia = med.getData_de_vencimento().getDate();
         mes = med.getData_de_vencimento().getMonth();
         ano = med.getData_de_vencimento().getYear();
-        String vencimento = "" + ano + "-" + (mes + 1) + "-" + dia;
+        String vencimento = "" + ano + "/" + (mes + 1) + "/" + dia;
 
         String sql = "UPDATE medicamentos SET "
-                + " nome =               '" + med.getNome() + "' ,"
+                + " nome =               '" + med.getNome() +       "' ,"
                 + " quantidade =          " + med.getQuantidade() + "  ,"
-                + " data_de_cadastro =   '" + cadastro + "' ,"
-                + " data_de_vencimento = '" + vencimento + "' ,"
+                + " data_de_cadastro =   '" + cadastro +            "' ,"
+                + " data_de_vencimento = '" + vencimento +          "' ,"
                 + " codCategoria =        " + med.getCategoria().getCodigo() + "   "
                 + " WHERE codigo =        " + med.getCodigo();
         Conexao.executar(sql);

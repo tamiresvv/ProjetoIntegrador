@@ -16,25 +16,25 @@ import model.ObjCategoria;
  * @author 181710089
  */
 public class CategoriaDAO {
-    public static void inserir(ObjCategoria cat){
+     public static void inserir(ObjCategoria cid){
         String sql = "INSERT INTO categorias "
                 + " ( nome ) VALUES "
-                + "( '" + cat.getNome() + "' )";
+                + "( '" + cid.getNome() + "' )";
         Conexao.executar(sql);
         
     }
     
-    public static void editar(ObjCategoria cat){
+    public static void editar(ObjCategoria cid){
         String sql = "UPDATE categorias SET "
-                + " nome = '" + cat.getNome() + "' "
-                + " WHERE codigo = " + cat.getCodigo(); 
+                + " nome = '" + cid.getNome() + "' "
+                + " WHERE codigo = " + cid.getCodigo(); 
         Conexao.executar(sql);
         
     }
     
-    public static void excluir(ObjCategoria cat){
+    public static void excluir(ObjCategoria cid){
         String sql = "DELETE FROM categorias "
-                 + " WHERE codigo = " + cat.getCodigo(); 
+                 + " WHERE codigo = " + cid.getCodigo(); 
         Conexao.executar(sql);
         
     }
@@ -63,6 +63,7 @@ public class CategoriaDAO {
         
         return lista;
     }
+    
     public static ObjCategoria getCategoriaByCodigo(int codigo){
         ObjCategoria categoria = new ObjCategoria();
         
@@ -79,5 +80,6 @@ public class CategoriaDAO {
                 
         return categoria;
     }
+    
     
 }

@@ -30,14 +30,12 @@ public class ListMedicamentos extends javax.swing.JInternalFrame {
         carregarTabela();            
     }
     
-    private void carregarTabela(){
+    public void carregarTabela(){
         DefaultTableModel modelo = new DefaultTableModel();
         String[] colunas = { "Código" , "Nome", "Quantidade", "Cadastro", "Vencimento", "Categoria","Situação"};
         modelo.setColumnIdentifiers(colunas);
         List<ObjMedicamento> lista = MedicamentoDAO.getMedicamentos();
-        
-       
-        
+  
         
         for(ObjMedicamento pro : lista ){
             
@@ -233,7 +231,7 @@ public class ListMedicamentos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Você deve selecionar um medicamento!");
         }else{
             int codigo = (int) tableMedicamentos.getValueAt(linha, 0);
-            FrmMedicamento tela = new FrmMedicamento(codigo);
+            FrmMedicamento tela = new FrmMedicamento(codigo, this);
             this.painelTelaInicial.add(tela);
             tela.setVisible(true);
             

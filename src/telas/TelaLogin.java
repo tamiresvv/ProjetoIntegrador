@@ -108,14 +108,14 @@ public class TelaLogin extends javax.swing.JFrame {
                 TelaInicial tela = new TelaInicial();
 
                 tela.setVisible(true);
-                dispose();                        //administrador ou usuário
+                dispose();                        
             } else {
                 JOptionPane.showMessageDialog(null, "Login ou Senha inválidos.");
                 txtSenha.setText("");
                 txtUsuario.setText("");
             }
 
-        }//else do login e senha vazios
+        }
 
 
     }//GEN-LAST:event_btnAcessarActionPerformed

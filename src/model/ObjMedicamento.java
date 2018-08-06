@@ -19,7 +19,7 @@ public class ObjMedicamento {
         this.nome = nome;
     }
 
-    public ObjMedicamento(int codigo, double quantidade, String nome, String tipo,Date data_de_cadastro,Date data_de_vencimento) {
+    public ObjMedicamento(int codigo, double quantidade, String nome, ObjCategoria categoria, Date data_de_cadastro,Date data_de_vencimento) {
         this.codigo = codigo;
         this.quantidade = quantidade;
         this.nome = nome;

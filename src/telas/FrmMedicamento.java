@@ -23,12 +23,11 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
     private ObjMedicamento medicamento;
     private List<ObjCategoria> listaDeCategorias;
     private boolean novo;
-    
+    private ListMedicamentos telaListMedicamentos;
 
     /**
      * Creates new form FrmMedicamento
      */
-
     public FrmMedicamento() {
         initComponents();
         carregarCategorias();
@@ -37,22 +36,23 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
 
     }
 
-    public FrmMedicamento(int codigo) {
+    public FrmMedicamento(int codigo, ListMedicamentos telaListMedicamentos) {
         initComponents();
-        carregarCategorias();
+        carregarCategorias();       
+        novo = false;
         medicamento = MedicamentoDAO.getMedicamentoByCodigo(codigo);
         carregarFormulario();
-        novo = false;
+        this.telaListMedicamentos = telaListMedicamentos;
     }
 
     private void carregarCategorias() {
-        List<ObjCategoria> listaDeCategorias = CategoriaDAO.getCategorias();
+        listaDeCategorias = CategoriaDAO.getCategorias();
         ObjCategoria fake = new ObjCategoria(0, "Selecione...");
         listaDeCategorias.add(0, fake);
 
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
-        for (ObjCategoria cid : listaDeCategorias) {
-            modelo.addElement(cid);
+        for (ObjCategoria cat : listaDeCategorias) {
+            modelo.addElement(cat);
         }
         cmbCategoria.setModel(modelo);
     }
@@ -60,12 +60,13 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
     private void carregarFormulario() {
         String qtd = "" + medicamento.getQuantidade();
         qtd = qtd.replace(".", ",");
-        txtQuantidade.setText(qtd);
+
+        lblCodigo.setText(String.valueOf(medicamento.getCodigo()));
 
         txtNome.setText(medicamento.getNome());
 
-        lblCodigo.setText(String.valueOf(medicamento.getCodigo()));
-        
+        txtQuantidade.setText(qtd);
+
         int contCategorias = cmbCategoria.getModel().getSize();
         for (int i = 1; i < contCategorias; i++) {
             ObjCategoria cat = listaDeCategorias.get(i);
@@ -90,9 +91,7 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
         }
 
         txtDataVencimento.setText(sdia + "/" + smes + "/" + ano);
-        
-        
-        
+
         dia = medicamento.getData_de_cadastro().getDate();
         mes = medicamento.getData_de_cadastro().getMonth() + 1;
         ano = medicamento.getData_de_cadastro().getYear();
@@ -349,12 +348,21 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
             med.setData_de_vencimento(vencimento);
 
             med.setCategoria(categoria);
-            MedicamentoDAO.inserir(med);
-
+            if (novo) {
+                MedicamentoDAO.inserir(med);
+            } else {
+                MedicamentoDAO.editar(medicamento);
+                telaListMedicamentos.carregarTabela();
+                this.dispose();
+            }
+        
             limparFormulario();
-            if(!novo){
-        this.dispose();
-    }
+        if (!novo) {
+                this.dispose();
+
+            
+            }       
+
         }
 
     }//GEN-LAST:event_btnSalvarActionPerformed

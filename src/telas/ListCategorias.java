@@ -18,9 +18,10 @@ import model.ObjCategoria;
  */
 public class ListCategorias extends javax.swing.JInternalFrame {
      
-    private JDesktopPane painelTelaInicial;
+   private JDesktopPane painelTelaInicial;
+
     /**
-     * Creates new form ListCategorias
+     * Creates new form ListCategoria
      */
     public ListCategorias(JDesktopPane painelTelaInicial) {
         initComponents();
@@ -152,11 +153,11 @@ public class ListCategorias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Você deve selecionar uma categoria!");
         }else{
             int codigo = (int) tableCategorias.getValueAt(linha, 0);
-            FrmCategoria formulario = new FrmCategoria();
+            FrmCategoria formulario = new FrmCategoria(codigo,this);
             this.painelTelaInicial.add(formulario);
             formulario.setVisible(true);
             
-        }    
+        }  
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
