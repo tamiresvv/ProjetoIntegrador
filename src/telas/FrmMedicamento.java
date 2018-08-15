@@ -103,7 +103,7 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
 
         smes = "" + mes;
         if (mes < 10) {
-            sdia = "0" + mes;
+            smes = "0" + mes;
         }
 
         txtDataCadastro.setText(sdia + "/" + smes + "/" + ano);
@@ -351,6 +351,7 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
             if (novo) {
                 MedicamentoDAO.inserir(med);
             } else {
+                med.setCodigo(Integer.valueOf(lblCodigo.getText()));
                 MedicamentoDAO.editar(medicamento);
                 telaListMedicamentos.carregarTabela();
                 this.dispose();
