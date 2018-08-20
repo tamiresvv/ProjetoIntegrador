@@ -52,6 +52,7 @@ public class MedicamentoDAO {
                 + " data_de_vencimento = '" + vencimento +          "' ,"
                 + " codCategoria =        " + med.getCategoria().getCodigo() + "   "
                 + " WHERE codigo =        " + med.getCodigo();
+        System.out.println(sql);
         Conexao.executar(sql);
 
     }

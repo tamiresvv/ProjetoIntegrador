@@ -352,7 +352,7 @@ public class FrmMedicamento extends javax.swing.JInternalFrame {
                 MedicamentoDAO.inserir(med);
             } else {
                 med.setCodigo(Integer.valueOf(lblCodigo.getText()));
-                MedicamentoDAO.editar(medicamento);
+                MedicamentoDAO.editar(med);
                 telaListMedicamentos.carregarTabela();
                 this.dispose();
             }
